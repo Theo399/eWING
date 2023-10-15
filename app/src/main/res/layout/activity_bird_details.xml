@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".map.bird.BirdDetailActivity">
+    tools:context=".map.bird.BirdDetailsActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolBar"
@@ -172,7 +172,7 @@
             android:includeFontPadding="false"
             android:text="@string/add"
             android:textColor="#283593"
-            android:onClick="addDetails"
+            android:onClick="add"
             tools:ignore="TouchTargetSizeCheck,VisualLintButtonSize,VisualLintBounds" />
 
         <Button
@@ -186,7 +186,7 @@
             android:backgroundTint="@color/green"
             android:text="@string/update"
             android:textColor="#283593"
-            android:onClick="updateDetails"
+            android:onClick="update"
             tools:ignore="VisualLintButtonSize" />
 
         <Button
@@ -199,7 +199,7 @@
             android:backgroundTint="@color/green"
             android:text="@string/delete"
             android:textColor="#283593"
-            android:onClick="deleteDetails"
+            android:onClick="delete"
             tools:ignore="VisualLintButtonSize" />
 
     </LinearLayout>

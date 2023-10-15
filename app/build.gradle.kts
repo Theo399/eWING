@@ -11,6 +11,7 @@ android {
     defaultConfig {
         applicationId = "com.example.ewing20"
         minSdk = 30
+        //noinspection OldTargetApi
         targetSdk = 33
         versionCode = 1
         versionName = "1.0"
@@ -50,6 +51,8 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
     implementation("com.google.android.gms:play-services-maps:18.1.0")
+    implementation("com.google.android.gms:play-services-location:21.0.1")
+
     implementation("androidx.core:core-splashscreen:1.0.1")
     implementation("com.android.car.ui:car-ui-lib:2.5.1")
 }

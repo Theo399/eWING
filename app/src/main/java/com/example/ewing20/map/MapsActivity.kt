@@ -4,36 +4,39 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Resources
-import androidx.appcompat.app.AppCompatActivity
+import android.location.Address
+import android.location.Geocoder
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.example.ewing20.map.bird.BirdActivity
 import com.example.ewing20.R
-
+import com.example.ewing20.databinding.ActivityMapsBinding
+import com.example.ewing20.map.bird.BirdActivity
+import com.example.ewing20.map.bird.BirdDetailsActivity
+import com.example.ewing20.map.profile.ProfileActivity
+import com.example.ewing20.map.setting.SettingActivity
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
-import com.example.ewing20.databinding.ActivityMapsBinding
-import com.example.ewing20.map.profile.ProfileActivity
-import com.example.ewing20.map.setting.SettingActivity
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MapStyleOptions
+import com.google.android.gms.maps.model.MarkerOptions
+import java.io.IOException
 import java.util.Locale
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var map: GoogleMap
     private lateinit var binding: ActivityMapsBinding
-
     private val TAG = MapsActivity::class.java.simpleName
-
     private val REQUEST_LOCATION_PERMISSION = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,12 +46,19 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         setContentView(binding.root)
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        val mapFragment = supportFragmentManager
-            .findFragmentById(R.id.map) as SupportMapFragment
+        val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
+        binding.searchBtn.setOnClickListener {
+            searchLocation()
+        }
 
         binding.birdsBtn.setOnClickListener {
             startActivity(Intent(this, BirdActivity::class.java))
+        }
+
+        binding.detailsBtn.setOnClickListener {
+            startActivity(Intent(this, BirdDetailsActivity::class.java))
         }
 
         binding.profileBtn.setOnClickListener {
@@ -129,7 +139,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     .position(latLng)
                     .title(getString(R.string.dropped_pin))
                     .snippet(snippet)
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
             )
         }
     }
@@ -138,8 +148,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         map.setOnMapClickListener { poi ->
             val poiMarker = map.addMarker(
                 MarkerOptions()
-                    //.position(poi.latLng)
-                    //.title(poi.name)
+                //.position(poi.latLng)
+                //.title(poi.name)
             )
             poiMarker?.showInfoWindow()
         }
@@ -200,6 +210,30 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             if (grantResults.contains(PackageManager.PERMISSION_GRANTED)) {
                 enableMyLocation()
             }
+        }
+    }
+
+    @Suppress("DEPRECATION")
+    private fun searchLocation() {
+        val locationSearch: SearchView = findViewById(R.id.searchView)
+        val location: String = locationSearch.toString().trim()
+        var addressList: List<Address>? = null
+
+        if (location == "") {
+            Toast.makeText(this, "Provide location", Toast.LENGTH_SHORT)
+                .show()
+        } else {
+            val geoCoder = Geocoder(this)
+            try {
+                addressList = geoCoder.getFromLocationName(location, 1)
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+
+            val address = addressList!![0]
+            val searchLatLng = LatLng(address.latitude, address.longitude)
+            map.addMarker(MarkerOptions().position(searchLatLng).title(location))
+            map.animateCamera(CameraUpdateFactory.newLatLngZoom(searchLatLng, 12f))
         }
     }
 }

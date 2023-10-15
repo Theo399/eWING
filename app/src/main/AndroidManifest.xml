@@ -2,9 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="com.example.marto.finparking.permission.MAPS_RECIEVE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="com.google.android.providers.gsf.permisssion.READ_GSERVICES" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -19,6 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EWING20"
         tools:targetApi="31">
+        <activity
+            android:name=".map.bird.BirdDetailsActivity"
+            android:exported="false" />
         <activity
             android:name=".map.setting.SettingActivity"
             android:exported="false" />
@@ -38,9 +39,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".map.bird.BirdDetailActivity"
-            android:exported="false" />
         <activity
             android:name=".map.bird.BirdActivity"
             android:exported="false" />
