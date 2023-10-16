@@ -67,9 +67,9 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
             android:layout_weight="1"
-            android:backgroundTint="@color/green"
+            android:backgroundTint="@color/grey"
             android:text="@string/add_image"
-            android:textColor="#283593"
+            android:textColor="@color/black"
             tools:ignore="VisualLintButtonSize" />
 
         <Button
@@ -79,9 +79,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_weight="1"
-            android:backgroundTint="@color/green"
+            android:backgroundTint="@color/grey"
             android:text="@string/add_bird_marker"
-            android:textColor="#283593"
+            android:textColor="@color/black"
             android:onClick="setBirdMarker"
             tools:ignore="VisualLintButtonSize" />
 
@@ -168,10 +168,10 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="5dp"
             android:layout_weight="1"
-            android:backgroundTint="@color/green"
+            android:backgroundTint="@color/grey"
             android:includeFontPadding="false"
             android:text="@string/add"
-            android:textColor="#283593"
+            android:textColor="@color/black"
             android:onClick="add"
             tools:ignore="TouchTargetSizeCheck,VisualLintButtonSize,VisualLintBounds" />
 
@@ -183,9 +183,9 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_weight="1"
-            android:backgroundTint="@color/green"
+            android:backgroundTint="@color/grey"
             android:text="@string/update"
-            android:textColor="#283593"
+            android:textColor="@color/black"
             android:onClick="update"
             tools:ignore="VisualLintButtonSize" />
 
@@ -196,9 +196,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_weight="1"
-            android:backgroundTint="@color/green"
+            android:backgroundTint="@color/grey"
             android:text="@string/delete"
-            android:textColor="#283593"
+            android:textColor="@color/black"
             android:onClick="delete"
             tools:ignore="VisualLintButtonSize" />
 

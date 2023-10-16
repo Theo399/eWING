@@ -130,6 +130,5 @@ class BirdActivity : AppCompatActivity() {
     }
     public override fun onResume() {
         super.onResume()
-        loadIntoList("ORDER BY date DESC")
     }
 }

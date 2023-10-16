@@ -33,30 +33,24 @@
 
         <androidx.appcompat.widget.SearchView
             android:id="@+id/searchView"
-            android:layout_width="match_parent"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_margin="5dp"
             app:iconifiedByDefault="false"
             android:elevation="5dp"
             android:background="@drawable/bg_search_view" />
 
-    </androidx.appcompat.widget.Toolbar>
+        <Button
+            android:id="@+id/searchBtn"
+            android:layout_width="94dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:elevation="5dp"
+            android:text="@string/search"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/grey"/>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/searchBtn"
-        style="@style/Widget.MaterialComponents.FloatingActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="20dp"
-        android:contentDescription="@string/todo"
-        android:tint="@android:color/black"
-        app:backgroundTint="@color/green"
-        app:srcCompat="@drawable/ic_search"
-        app:tint="@color/black"
-        app:layout_constraintBottom_toTopOf="@id/birdsBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="ImageContrastCheck" />
+    </androidx.appcompat.widget.Toolbar>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/birdsBtn"
@@ -68,11 +62,11 @@
         android:contentDescription="@string/todo"
         android:tint="@android:color/black"
         app:backgroundTint="@color/green"
-        app:srcCompat="@drawable/ic_bird"
-        app:tint="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/detailsBtn"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="ImageContrastCheck" />
+        app:srcCompat="@drawable/ic_bird"
+        app:tint="@color/black"
+        tools:ignore="ImageContrastCheck,DuplicateSpeakableTextCheck" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/detailsBtn"

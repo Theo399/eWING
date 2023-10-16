@@ -46,4 +46,5 @@
     <string name="registerButton">Register</string>
     <string name="username">eg. Theodore</string>
     <string name="login">Login</string>
+    <string name="search">Search</string>
 </resources>
