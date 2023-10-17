@@ -27,10 +27,10 @@ class BirdActivity : AppCompatActivity() {
     private val dbHandler = DBHelper(this, null)
     private var birdList = ArrayList<Bird>()
 
-    private lateinit var spinner: Spinner
-    private lateinit var textView: TextView
+    private lateinit var mSpinner: Spinner
+    private lateinit var mTextView: TextView
 
-    private lateinit var listView: ListView
+    private lateinit var mListView: ListView
     private var customAdapter: BirdAdapter? = null
 
     private var rarityTypes = mapOf(Pair(0, "Common"), Pair(1, "Rare"), Pair(2, "Extremely rare"))
@@ -45,9 +45,9 @@ class BirdActivity : AppCompatActivity() {
             startActivity(Intent(this, BirdDetailsActivity::class.java))
         }
 
-        textView = findViewById(R.id.textView)
-        spinner = findViewById(R.id.sortSpinner)
-        listView = findViewById(R.id.listView)
+        mTextView = findViewById(R.id.textView)
+        mSpinner = findViewById(R.id.sortSpinner)
+        mListView = findViewById(R.id.listView)
 
         val sortNames = resources.getStringArray(R.array.sort_types)
 
@@ -58,9 +58,9 @@ class BirdActivity : AppCompatActivity() {
         )
 
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinner.adapter = myAdapter
+        mSpinner.adapter = myAdapter
 
-        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        mSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
 
             }
@@ -110,24 +110,33 @@ class BirdActivity : AppCompatActivity() {
         customAdapter?.notifyDataSetChanged()
 
         if (birdList.isEmpty()) {
-            textView.text = "Add a bird."
+            mTextView.text = "Add a bird."
         } else {
-            textView.visibility = View.GONE
+            mTextView.visibility = View.GONE
 
             customAdapter = BirdAdapter(this@BirdActivity, birdList)
-            listView.adapter = customAdapter
+            mListView.adapter = customAdapter
 
-            findViewById<ListView>(R.id.listView).setOnItemClickListener { _, _, i, _ ->
+            mListView.setOnItemClickListener { _, _, i, _ ->
+
+                val id = birdList[i].id
+                val image = birdList[i].image
+                val name = birdList[i].name
+                val note = birdList[i].note
+                val rarity = birdList[i].rarity
+                val latLng = birdList[i].latLng
+                val address = birdList[i].address
+
                 val intent = Intent(this, BirdDetailsActivity::class.java)
 
-                intent.putExtra("id", birdList[+i].id)
-                intent.putExtra("name", birdList[+i].name)
-                intent.putExtra("notes", birdList[+i].note)
-                intent.putExtra("rarity", rarityTypes[birdList[+i].rarity])
-                intent.putExtra("latLng", birdList[+i].latLng)
-                intent.putExtra("address", birdList[+i].address)
+                intent.putExtra("id", id)
+                intent.putExtra("name", name)
+                intent.putExtra("notes", note)
+                intent.putExtra("rarity", rarityTypes[rarity])
+                intent.putExtra("latLng", latLng)
+                intent.putExtra("address", address)
 
-                Utils.addBitmapToMemoryCache(birdList[+i].id, Utils.getImage(birdList[+i].image))
+                Utils.addBitmapToMemoryCache(id, Utils.getImage(image))
 
                 startActivity(intent)
             }
