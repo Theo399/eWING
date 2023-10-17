@@ -57,10 +57,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             startActivity(Intent(this, BirdActivity::class.java))
         }
 
-        binding.detailsBtn.setOnClickListener {
-            startActivity(Intent(this, BirdDetailsActivity::class.java))
-        }
-
         binding.profileBtn.setOnClickListener {
             startActivity(Intent(this, ProfileActivity::class.java))
         }

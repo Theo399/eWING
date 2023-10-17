@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ewing20.R
 import com.example.ewing20.databinding.ActivityBirdBinding
+import com.example.ewing20.databinding.ActivityMapsBinding
 import com.example.ewing20.map.bird.birdAdapter.BirdAdapter
 import com.example.ewing20.map.bird.birdDBHelper.DBHelper
 import com.example.ewing20.map.bird.birdVariables.Bird
@@ -38,7 +39,11 @@ class BirdActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = ActivityBirdBinding.inflate(layoutInflater)
-        setContentView(R.layout.activity_bird)
+        setContentView(binding.root)
+
+        binding.detailsBtn.setOnClickListener {
+            startActivity(Intent(this, BirdDetailsActivity::class.java))
+        }
 
         textView = findViewById(R.id.textView)
         spinner = findViewById(R.id.sortSpinner)

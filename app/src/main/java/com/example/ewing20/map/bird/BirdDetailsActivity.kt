@@ -182,7 +182,7 @@ class BirdDetailsActivity : AppCompatActivity() {
         Toast.makeText(this, "Data added", Toast.LENGTH_SHORT).show()
         finish()
 
-        val intent = Intent(this, MapsActivity::class.java)
+        val intent = Intent(this, BirdActivity::class.java)
         startActivity(intent)
 
     }
@@ -205,7 +205,7 @@ class BirdDetailsActivity : AppCompatActivity() {
         Toast.makeText(this, "Data updated", Toast.LENGTH_SHORT).show()
         finish()
 
-        val intent = Intent(this, MapsActivity::class.java)
+        val intent = Intent(this, BirdActivity::class.java)
         startActivity(intent)
     }
 
@@ -214,7 +214,7 @@ class BirdDetailsActivity : AppCompatActivity() {
         Toast.makeText(this, "Data deleted", Toast.LENGTH_SHORT).show()
         finish()
 
-        val intent = Intent(this, MapsActivity::class.java)
+        val intent = Intent(this, BirdActivity::class.java)
         startActivity(intent)
     }
 }
