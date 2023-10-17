@@ -22,7 +22,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.drawToBitmap
 import com.example.ewing20.R
-import com.example.ewing20.map.MapsActivity
 import com.example.ewing20.map.bird.birdDBHelper.DBHelper
 import com.example.ewing20.utils.Utils
 
