@@ -12,6 +12,7 @@ import android.location.Location
 import android.os.Build
 import android.os.Bundle
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -51,6 +52,19 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, LocationListener,
     private var mGoogleApiClient: GoogleApiClient? = null
     private lateinit var mLocationRequest: LocationRequest
 
+    private val DEFAULT_ZOOM = 15f
+
+    private lateinit var mDistanceView: TextView
+
+    var end_Latitude = 0.0
+    var end_longitude = 0.0
+
+    var origin: MarkerOptions? = null
+    var destination: MarkerOptions? = null
+
+    var latitude = 0.0
+    var longitude = 0.0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -60,6 +74,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, LocationListener,
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
+        mDistanceView = findViewById(R.id.distanceView)
 
         binding.searchBtn.setOnClickListener {
             searchLocation()
@@ -184,7 +200,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, LocationListener,
 
         // Move map camera
         mMap!!.moveCamera(CameraUpdateFactory.newLatLng(latLng))
-        mMap!!.animateCamera(CameraUpdateFactory.zoomTo(11f))
+        mMap!!.animateCamera(CameraUpdateFactory.zoomTo(DEFAULT_ZOOM))
 
         // Stop location updates
         if (mGoogleApiClient != null) {
@@ -300,12 +316,54 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, LocationListener,
                 e.printStackTrace()
             }
 
-            val address = addressList!![0]
-            val latLng = LatLng(address.latitude, address.longitude)
-            mMap!!.addMarker(MarkerOptions().position(latLng).title(location))
-            mMap!!.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 11f))
-            Toast.makeText(applicationContext,  address.latitude.toString() + " " + address.longitude, Toast.LENGTH_LONG)
-                .show()
+            //val address = addressList!![0]
+            //val latLng = LatLng(address.latitude, address.longitude)
+            //mMap!!.addMarker(MarkerOptions().position(latLng).title(location))
+            //mMap!!.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, DEFAULT_ZOOM))
+            //Toast.makeText(applicationContext,  address.latitude.toString() + " " + address.longitude, Toast.LENGTH_LONG)
+            //    .show()
+
+            if (addressList != null) {
+                for (i in addressList.indices) {
+                    val myAddress = addressList[i]
+                    val latLng = LatLng(myAddress.latitude, myAddress.longitude)
+                    val markerOptions = MarkerOptions()
+                    markerOptions.position(latLng)
+                    mMap!!.addMarker(markerOptions)
+                    end_Latitude = myAddress.latitude
+                    end_longitude = myAddress.longitude
+
+                    mMap!!.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, DEFAULT_ZOOM))
+
+                    val mo = MarkerOptions()
+                    mo.title("Distance")
+
+                    val results = FloatArray(10)
+                    Location.distanceBetween(
+                        latitude,
+                        longitude,
+                        end_Latitude,
+                        end_longitude,
+                        results
+                    )
+
+                    val s = String.format("%1f", results[0] / 1000)
+
+                    // Setting marker to draw route between these two points
+                    origin = MarkerOptions().position(LatLng(latitude, longitude))
+                        .title("HSR Layout").snippet("origin")
+                    destination = MarkerOptions().position(LatLng(end_Latitude, end_longitude))
+                        .title(locationSearch.text.toString())
+                        .snippet("Distance = $s KM")
+                    mMap!!.addMarker(destination!!)
+                    mMap!!.addMarker(origin!!)
+
+                    Toast.makeText(applicationContext,  "Distance = $s KM", Toast.LENGTH_SHORT)
+                        .show()
+
+                    mDistanceView.text = "$s Km"
+                }
+            }
         }
     }
 }
