@@ -2,20 +2,22 @@ package com.example.ewing20.authentication.authenticationDBHelper
 
 import android.content.ContentValues
 import android.content.Context
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import com.example.ewing20.map.bird.birdDBHelper.DBHelper
 
 class DBHelper(context: Context):
     SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION){
 
     companion object {
-        private const val DATABASE_NAME = "UserDatabase.db"
-        private const val DATABASE_VERSION = 1
-        private const val TABLE_NAME = "data"
-        private const val COLUMN_ID = "id"
-        private const val COLUMN_USERNAME = "username"
-        private const val COLUMN_EMAIL = "email"
-        private const val COLUMN_PASSWORD = "password"
+        const val DATABASE_NAME = "UserDatabase.db"
+        const val DATABASE_VERSION = 1
+        const val TABLE_NAME = "data"
+        const val COLUMN_ID = "id"
+        const val COLUMN_USERNAME = "username"
+        const val COLUMN_EMAIL = "email"
+        const val COLUMN_PASSWORD = "password"
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
@@ -53,4 +55,11 @@ class DBHelper(context: Context):
         cursor.close()
         return userExists
     }
+
+    /*fun profileUser(email: String, password: String): Cursor? {
+        val db = readableDatabase
+        val selection = "$COLUMN_EMAIL = ? AND $COLUMN_PASSWORD = ?"
+        val selectionArgs = arrayOf(email, password)
+        return db.rawQuery("SELECT * FROM $TABLE_NAME WHERE $selection", selectionArgs)
+    }*/
 }
