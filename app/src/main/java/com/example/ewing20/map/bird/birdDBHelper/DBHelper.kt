@@ -1,12 +1,10 @@
 package com.example.ewing20.map.bird.birdDBHelper
 
-import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import android.database.sqlite.SQLiteQueryBuilder
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -91,26 +89,6 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         )
         val date = Date()
         return dateFormat.format(date)
-    }
-
-    @SuppressLint("Range")
-    fun getBitmapByName(id: String): ByteArray? {
-        val db = this.writableDatabase
-        val qb = SQLiteQueryBuilder()
-
-        val sqlSelect = arrayOf(COLUMN_IMAGE)
-        qb.tables =
-            TABLE_BIRDS
-        val c = qb.query(db, sqlSelect, "id = ?", arrayOf(id), null, null, null)
-
-        var result: ByteArray? = null
-
-        if (c.moveToFirst()) {
-            do {
-                result = c.getBlob(c.getColumnIndex(COLUMN_IMAGE))
-            } while (c.moveToNext())
-        }
-        return result
     }
 
     companion object {

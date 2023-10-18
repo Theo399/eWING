@@ -1,20 +1,10 @@
 package com.example.ewing20.map.profile
 
 import android.content.Intent
-import android.database.Cursor
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.example.ewing20.R
+import androidx.appcompat.app.AppCompatActivity
 import com.example.ewing20.authentication.LoginActivity
-import com.example.ewing20.authentication.RegisterActivity
-import com.example.ewing20.authentication.authenticationDBHelper.DBHelper
-import com.example.ewing20.databinding.ActivityLoginBinding
 import com.example.ewing20.databinding.ActivityProfileBinding
-import com.example.ewing20.map.MapsActivity
 
 class ProfileActivity : AppCompatActivity() {
 

@@ -2,10 +2,8 @@ package com.example.ewing20.authentication.authenticationDBHelper
 
 import android.content.ContentValues
 import android.content.Context
-import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import com.example.ewing20.map.bird.birdDBHelper.DBHelper
 
 class DBHelper(context: Context):
     SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION){
@@ -55,11 +53,4 @@ class DBHelper(context: Context):
         cursor.close()
         return userExists
     }
-
-    /*fun profileUser(email: String, password: String): Cursor? {
-        val db = readableDatabase
-        val selection = "$COLUMN_EMAIL = ? AND $COLUMN_PASSWORD = ?"
-        val selectionArgs = arrayOf(email, password)
-        return db.rawQuery("SELECT * FROM $TABLE_NAME WHERE $selection", selectionArgs)
-    }*/
 }
