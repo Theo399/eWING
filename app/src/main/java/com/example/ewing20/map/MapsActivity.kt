@@ -6,11 +6,14 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.location.Address
 import android.location.Geocoder
 import android.location.Location
+import android.os.AsyncTask
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
@@ -34,7 +37,14 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.PolylineOptions
+import org.json.JSONObject
+import java.io.BufferedReader
 import java.io.IOException
+import java.io.InputStream
+import java.io.InputStreamReader
+import java.net.HttpURLConnection
+import java.net.URL
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback, LocationListener,
     GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
@@ -52,18 +62,18 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, LocationListener,
     private var mGoogleApiClient: GoogleApiClient? = null
     private lateinit var mLocationRequest: LocationRequest
 
-    private val DEFAULT_ZOOM = 15f
+    private val defaultZoom = 15f
 
     private lateinit var mDistanceView: TextView
 
-    var end_Latitude = 0.0
-    var end_longitude = 0.0
+    private var endLatitude = 0.0
+    private var endlongitude = 0.0
 
-    var origin: MarkerOptions? = null
-    var destination: MarkerOptions? = null
+    private var origin: MarkerOptions? = null
+    private var destination: MarkerOptions? = null
 
-    var latitude = 0.0
-    var longitude = 0.0
+    private var latitude = 0.0
+    private var longitude = 0.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,6 +89,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, LocationListener,
 
         binding.searchBtn.setOnClickListener {
             searchLocation()
+        }
+
+        binding.clearBtn.setOnClickListener {
+            mapFragment.getMapAsync(this)
         }
 
         binding.birdsBtn.setOnClickListener {
@@ -200,7 +214,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, LocationListener,
 
         // Move map camera
         mMap!!.moveCamera(CameraUpdateFactory.newLatLng(latLng))
-        mMap!!.animateCamera(CameraUpdateFactory.zoomTo(DEFAULT_ZOOM))
+        mMap!!.animateCamera(CameraUpdateFactory.zoomTo(defaultZoom))
 
         // Stop location updates
         if (mGoogleApiClient != null) {
@@ -300,6 +314,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, LocationListener,
         }
     }*/
 
+    @SuppressLint("SetTextI18n")
     private fun searchLocation() {
         val locationSearch: EditText = findViewById(R.id.searchView)
         val location: String = locationSearch.text.toString()
@@ -330,10 +345,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, LocationListener,
                     val markerOptions = MarkerOptions()
                     markerOptions.position(latLng)
                     mMap!!.addMarker(markerOptions)
-                    end_Latitude = myAddress.latitude
-                    end_longitude = myAddress.longitude
+                    endLatitude = myAddress.latitude
+                    endlongitude = myAddress.longitude
 
-                    mMap!!.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, DEFAULT_ZOOM))
+                    mMap!!.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, defaultZoom))
 
                     val mo = MarkerOptions()
                     mo.title("Distance")
@@ -342,8 +357,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, LocationListener,
                     Location.distanceBetween(
                         latitude,
                         longitude,
-                        end_Latitude,
-                        end_longitude,
+                        endLatitude,
+                        endlongitude,
                         results
                     )
 
@@ -352,7 +367,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, LocationListener,
                     // Setting marker to draw route between these two points
                     origin = MarkerOptions().position(LatLng(latitude, longitude))
                         .title("HSR Layout").snippet("origin")
-                    destination = MarkerOptions().position(LatLng(end_Latitude, end_longitude))
+                    destination = MarkerOptions().position(LatLng(endLatitude, endlongitude))
                         .title(locationSearch.text.toString())
                         .snippet("Distance = $s KM")
                     mMap!!.addMarker(destination!!)
@@ -362,8 +377,140 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, LocationListener,
                         .show()
 
                     mDistanceView.text = "$s Km"
+
+                    /**
+                    // Getting URL to the Google Directions API
+                    val url: String = getDirectionUrl(origin!!.position, destination!!.position)
+
+                    val downloadTask = DownloadTask()
+
+                    // Start downloading json data from Google Directions API
+                    downloadTask.execute(url)
+                    */
                 }
             }
         }
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    inner class DownloadTask: AsyncTask<String?, Void?, String>() {
+
+        @Deprecated("Deprecated in Java")
+        override fun onPostExecute(result: String) {
+            super.onPostExecute(result)
+
+            val parserTask = ParserTask()
+            parserTask.execute(result)
+        }
+
+        @Deprecated("Deprecated in Java")
+        override fun doInBackground(vararg url: String?): String {
+            var data = ""
+            try {
+                data = downloadUrl(url[0].toString())
+            } catch (e: java.lang.Exception) {
+                Log.d("Background Task", e.toString())
+            }
+            return data
+        }
+    }
+
+    /**
+     * A class to parse the JSON format
+     */
+    @SuppressLint("StaticFieldLeak")
+    inner class ParserTask: AsyncTask<String?, Int?, List<List<HashMap<String, String>>>?>() {
+
+        // Parsing the data in non-ui thread
+        @Deprecated("Deprecated in Java")
+        override fun doInBackground(vararg jsonData: String?): List<List<HashMap<String, String>>>? {
+            val jObject: JSONObject
+            var routes: List<List<HashMap<String, String>>>? = null
+            try {
+                jObject = JSONObject(jsonData[0]!!)
+                val parser = DataParser()
+                routes = parser.parse(jObject)
+            } catch (e: java.lang.Exception) {
+                e.printStackTrace()
+            }
+            return routes
+        }
+
+        @Deprecated("Deprecated in Java")
+        override fun onPostExecute(result: List<List<HashMap<String, String>>>?) {
+
+            val points = ArrayList<LatLng?>()
+            val lineOptions = PolylineOptions()
+            for (i in result!!.indices) {
+                val path = result[i]
+                for (j in path.indices) {
+                    val point = path[j]
+                    val lat = point["lat"]!!.toDouble()
+                    val lng = point["lng"]!!.toDouble()
+                    val position = LatLng(lat, lng)
+                    points.add(position)
+                }
+                lineOptions.addAll(points)
+                lineOptions.width(8f)
+                lineOptions.color(Color.GREEN)
+                lineOptions.geodesic(true)
+            }
+            // Drawing polyline in the Google Map for the i-th route
+            if (points.size != 0)
+                mMap!!.addPolyline(lineOptions)
+        }
+    }
+
+    /**
+     * A class to download the URL
+     */
+    @Throws(IOException::class)
+    private fun downloadUrl(strUrl: String): String {
+        var data = ""
+        var iStream: InputStream? = null
+        var urlConnection: HttpURLConnection? = null
+        try {
+            val url = URL(strUrl)
+            urlConnection = url.openConnection() as HttpURLConnection
+            urlConnection.connect()
+            iStream = urlConnection.inputStream
+
+            val br = BufferedReader(InputStreamReader(iStream))
+            val sb = StringBuffer()
+            var line: String?
+            while (br.readLine().also { line = it } != null) {
+                sb.append(line)
+            }
+
+            data = sb.toString()
+            br.close()
+        } catch (e: java.lang.Exception) {
+            Log.d("Exception", e.toString())
+        } finally {
+            iStream!!.close()
+            urlConnection!!.disconnect()
+        }
+        return data
+    }
+
+    private fun getDirectionUrl(origin: LatLng, dest: LatLng): String {
+
+        // Origin of route
+        val strOrigin = "origin=" + origin.latitude + ", " + origin.longitude
+
+        // Destination of route
+        val strDest = "destination=" + dest.latitude + ", " + dest.longitude
+
+        // Setting transportation mode
+        val mode = "mode= driving"
+
+        // Building the parameters to the web service
+        val parameters = "$strOrigin & $strDest & $mode"
+
+        // Output format
+        val output = "json"
+
+        // Building the url to the web service
+        return "https://maps.googleapis.com/maps/api/directions/$output?$parameters&key=AIzaSyBvMOr4ftJjlnIG4Kx_D6XPcx67o4Mu1G0"
     }
 }

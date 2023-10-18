@@ -49,4 +49,12 @@
     <string name="search">Search</string>
     <string name="searchHint">e.g. South Africa</string>
     <string name="distance">e.g. 10 Km</string>
+    <string name="profileEmail">e.g. Theoboy399@gmail.com</string>
+    <string name="logout">Log Out</string>
+    <string name="profilePassword">e.g. Theo1234</string>
+    <string name="profileTitle">User\'s Profile</string>
+    <string name="emailHeading">Email</string>
+    <string name="passwordHeading">Password</string>
+    <string name="usernameHeading">Username</string>
+    <string name="profileUsername">e.g. Theodore</string>
 </resources>
