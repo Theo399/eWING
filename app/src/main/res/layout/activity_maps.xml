@@ -31,14 +31,22 @@
         app:layout_constraintBottom_toTopOf="@+id/map"
         app:layout_constraintHorizontal_bias="0.5">
 
-        <androidx.appcompat.widget.SearchView
+        <EditText
             android:id="@+id/searchView"
             android:layout_width="255dp"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_margin="5dp"
-            app:iconifiedByDefault="false"
+            android:autofillHints=""
+            android:background="@drawable/bg_search_view"
             android:elevation="5dp"
-            android:background="@drawable/bg_search_view" />
+            android:hint="@string/searchHint"
+            android:inputType="textPersonName"
+            android:textAlignment="center"
+            android:textColorHint="@color/grey"
+            app:iconifiedByDefault="false"
+            tools:ignore="LabelFor,TextContrastCheck"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="19dp" />
 
         <Button
             android:id="@+id/searchBtn"

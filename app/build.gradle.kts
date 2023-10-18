@@ -55,4 +55,6 @@ dependencies {
 
     implementation("androidx.core:core-splashscreen:1.0.1")
     implementation("com.android.car.ui:car-ui-lib:2.5.1")
+
+    implementation("androidx.legacy:legacy-support-v4:1.0.0")
 }

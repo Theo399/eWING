@@ -47,4 +47,5 @@
     <string name="username">eg. Theodore</string>
     <string name="login">Login</string>
     <string name="search">Search</string>
+    <string name="searchHint">e.g. South Africa</string>
 </resources>
