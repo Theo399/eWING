@@ -427,7 +427,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, LocationListener,
             val jObject: JSONObject
             var routes: List<List<HashMap<String, String>>>? = null
             try {
-                jObject = JSONObject(jsonData[0]!!)
+                jObject = jsonData[0]?.let { JSONObject(it) }!!
                 val parser = DataParser()
                 routes = parser.parse(jObject)
             } catch (e: java.lang.Exception) {
@@ -439,7 +439,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, LocationListener,
         @Deprecated("Deprecated in Java")
         override fun onPostExecute(result: List<List<HashMap<String, String>>>?) {
 
-            val points = ArrayList<LatLng?>()
+            val points = ArrayList<LatLng>()
             val lineOptions = PolylineOptions()
             for (i in result!!.indices) {
                 val path = result[i]
@@ -456,15 +456,15 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, LocationListener,
                 lineOptions.geodesic(true)
             }
             // Drawing polyline in the Google Map for the i-th route
-            if (points.size != 0)
+            if (points.size != 0) {
                 mMap!!.addPolyline(lineOptions)
+            }
         }
     }
 
     /**
      * A class to download the URL
      */
-    @Throws(IOException::class)
     private fun downloadUrl(strUrl: String): String {
         var data = ""
         var iStream: InputStream? = null
@@ -502,7 +502,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, LocationListener,
         val strDest = "destination=" + dest.latitude + ", " + dest.longitude
 
         // Setting transportation mode
-        val mode = "mode= driving"
+        val mode = "mode=driving"
 
         // Building the parameters to the web service
         val parameters = "$strOrigin & $strDest & $mode"
