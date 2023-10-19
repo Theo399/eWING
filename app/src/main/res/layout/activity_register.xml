@@ -54,11 +54,10 @@
                 android:id="@+id/username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_search_view"
+                android:inputType="textPersonName"
                 android:hint="@string/username"
                 android:minHeight="48dp"
                 android:textSize="15sp"
-                android:textAlignment="center"
                 android:autofillHints=""
                 tools:ignore="TextFields,VisualLintTextFieldSize" />
 
@@ -76,11 +75,10 @@
                 android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_search_view"
+                android:inputType="textPersonName"
                 android:hint="@string/email"
                 android:minHeight="48dp"
                 android:textSize="15sp"
-                android:textAlignment="center"
                 android:autofillHints=""
                 tools:ignore="TextFields,VisualLintTextFieldSize" />
 
@@ -102,6 +100,7 @@
                 android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="textPersonName"
                 android:hint="@string/password"
                 android:minHeight="48dp"
                 android:textSize="15sp"
@@ -130,6 +129,7 @@
                 android:id="@+id/confirmPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="textPersonName"
                 android:hint="@string/confirmPassword"
                 android:minHeight="48dp"
                 android:textSize="15sp"
