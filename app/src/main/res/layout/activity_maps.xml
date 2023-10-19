@@ -141,4 +141,36 @@
         app:layout_constraintEnd_toEndOf="parent"
         tools:ignore="ImageContrastCheck" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/zoomInBtn"
+        style="@style/Widget.MaterialComponents.FloatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="20dp"
+        android:contentDescription="@string/todo"
+        android:tint="@android:color/black"
+        app:backgroundTint="@color/grey"
+        app:layout_constraintTop_toBottomOf="@+id/toolBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_zoom_in"
+        app:tint="@color/black"
+        tools:ignore="ImageContrastCheck,DuplicateSpeakableTextCheck" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/zoomOutBtn"
+        style="@style/Widget.MaterialComponents.FloatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="20dp"
+        android:contentDescription="@string/todo"
+        android:tint="@android:color/black"
+        app:backgroundTint="@color/grey"
+        app:layout_constraintTop_toBottomOf="@+id/zoomInBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_zoom_out"
+        app:tint="@color/black"
+        tools:ignore="ImageContrastCheck,DuplicateSpeakableTextCheck" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

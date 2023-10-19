@@ -38,10 +38,6 @@
                 android:textColor="#43A047"
                 android:textSize="40sp"
                 android:textStyle="bold"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toTopOf="@+id/register_username"
                 tools:ignore="HardcodedText" />
 
             <TextView
@@ -52,23 +48,17 @@
                 android:text="Username"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@+id/register_title"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toTopOf="@+id/username"
                 tools:ignore="HardcodedText" />
 
             <EditText
                 android:id="@+id/username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/bg_search_view"
                 android:hint="@string/username"
                 android:minHeight="48dp"
                 android:textSize="15sp"
-                app:layout_constraintTop_toBottomOf="@+id/register_username"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toTopOf="@+id/register_email"
+                android:textAlignment="center"
                 android:autofillHints=""
                 tools:ignore="TextFields,VisualLintTextFieldSize" />
 
@@ -80,23 +70,17 @@
                 android:text="Email"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@+id/username"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toTopOf="@+id/email"
                 tools:ignore="HardcodedText" />
 
             <EditText
                 android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/bg_search_view"
                 android:hint="@string/email"
                 android:minHeight="48dp"
                 android:textSize="15sp"
-                app:layout_constraintTop_toBottomOf="@+id/register_email"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toTopOf="@+id/register_password"
+                android:textAlignment="center"
                 android:autofillHints=""
                 tools:ignore="TextFields,VisualLintTextFieldSize" />
 
