@@ -14,31 +14,40 @@
         app:layout_constraintTop_toBottomOf="@+id/toolBar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/distanceView"
+        app:layout_constraintBottom_toTopOf="@+id/linearlayout"
         app:layout_constraintHorizontal_bias="0.5"/>
 
-    <TextView
-        android:id="@+id/distanceView"
+    <LinearLayout
+        android:id="@+id/linearlayout"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:background="@drawable/bg_search_view"
-        android:hint="@string/distance"
-        android:textColor="@color/black"
-        android:textSize="25sp"
-        android:textAlignment="center"
+        android:background="@android:color/transparent"
         app:layout_constraintTop_toBottomOf="@+id/map"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"/>
+        app:layout_constraintHorizontal_bias="0.5">
+
+        <TextView
+            android:id="@+id/distanceView"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/bg_search_view"
+            android:hint="@string/distance"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:textAlignment="center"
+            />
+
+    </LinearLayout>
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/green"
+        android:background="@color/white"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:menu="@menu/menu_map"
@@ -70,10 +79,14 @@
             android:layout_width="94dp"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
+            android:backgroundTint="@color/green"
             android:elevation="5dp"
             android:text="@string/search"
-            android:textColor="@color/black"
-            android:backgroundTint="@color/grey"/>
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            tools:ignore="TextContrastCheck"
+            tools:layout_editor_absoluteX="276dp"
+            tools:layout_editor_absoluteY="5dp" />
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -82,15 +95,15 @@
         style="@style/Widget.MaterialComponents.FloatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
         android:contentDescription="@string/todo"
         android:tint="@android:color/black"
-        app:backgroundTint="@color/grey"
-        app:layout_constraintBottom_toTopOf="@+id/birdsBtn"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:backgroundTint="@color/green"
+        app:layout_constraintTop_toBottomOf="@+id/toolBar"
+        app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/ic_clear"
-        app:tint="@color/black"
+        app:tint="@color/white"
         tools:ignore="ImageContrastCheck,DuplicateSpeakableTextCheck" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -98,13 +111,13 @@
         style="@style/Widget.MaterialComponents.FloatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
         android:contentDescription="@string/todo"
         android:tint="@android:color/black"
-        app:backgroundTint="@color/green"
-        app:layout_constraintBottom_toTopOf="@+id/profileBtn"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:backgroundTint="@color/white"
+        app:layout_constraintTop_toBottomOf="@+id/clearBtn"
+        app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/ic_bird"
         app:tint="@color/black"
         tools:ignore="ImageContrastCheck,DuplicateSpeakableTextCheck" />
@@ -114,15 +127,15 @@
         style="@style/Widget.MaterialComponents.FloatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
         android:contentDescription="@string/todo"
         android:tint="@android:color/black"
-        app:backgroundTint="@color/green"
+        app:backgroundTint="@color/white"
         app:srcCompat="@drawable/ic_profile"
         app:tint="@color/black"
-        app:layout_constraintBottom_toTopOf="@id/settingBtn"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/birdsBtn"
+        app:layout_constraintStart_toStartOf="parent"
         tools:ignore="ImageContrastCheck" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -130,15 +143,15 @@
         style="@style/Widget.MaterialComponents.FloatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="60dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
         android:contentDescription="@string/todo"
         android:tint="@android:color/black"
-        app:backgroundTint="@color/green"
+        app:backgroundTint="@color/white"
         app:srcCompat="@drawable/ic_settings"
         app:tint="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profileBtn"
+        app:layout_constraintStart_toStartOf="parent"
         tools:ignore="ImageContrastCheck" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -146,12 +159,12 @@
         style="@style/Widget.MaterialComponents.FloatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginBottom="5dp"
         android:contentDescription="@string/todo"
         android:tint="@android:color/black"
         app:backgroundTint="@color/grey"
-        app:layout_constraintTop_toBottomOf="@+id/toolBar"
+        app:layout_constraintBottom_toTopOf="@+id/zoomOutBtn"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/ic_zoom_in"
         app:tint="@color/black"
@@ -162,14 +175,30 @@
         style="@style/Widget.MaterialComponents.FloatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginBottom="70dp"
         android:contentDescription="@string/todo"
         android:tint="@android:color/black"
         app:backgroundTint="@color/grey"
-        app:layout_constraintTop_toBottomOf="@+id/zoomInBtn"
+        app:layout_constraintBottom_toTopOf="@+id/linearlayout"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/ic_zoom_out"
+        app:tint="@color/black"
+        tools:ignore="ImageContrastCheck,DuplicateSpeakableTextCheck" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/locationBtn"
+        style="@style/Widget.MaterialComponents.FloatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:layout_marginTop="5dp"
+        android:contentDescription="@string/todo"
+        android:tint="@android:color/black"
+        app:backgroundTint="@color/grey"
+        app:layout_constraintTop_toBottomOf="@+id/toolBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_location"
         app:tint="@color/black"
         tools:ignore="ImageContrastCheck,DuplicateSpeakableTextCheck" />
 

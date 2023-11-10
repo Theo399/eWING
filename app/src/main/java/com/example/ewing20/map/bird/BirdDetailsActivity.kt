@@ -106,7 +106,7 @@ class BirdDetailsActivity : AppCompatActivity() {
             }
         }
     }
-    fun setBirdMarker(view: View) {
+    fun setBirdMarker() {
 
         val intent = Intent(applicationContext, BirdDetailsActivity::class.java)
         intent.putExtra("address", address)
@@ -164,7 +164,7 @@ class BirdDetailsActivity : AppCompatActivity() {
         }
     }
 
-    fun add(view: View) {
+    fun add() {
         val name = nameEditText.text.toString()
         val notes = notesEditText.text.toString()
         val rarity = rarityTypes[raritySpinner.selectedItem]
@@ -186,7 +186,7 @@ class BirdDetailsActivity : AppCompatActivity() {
 
     }
 
-    fun update(view: View) {
+    fun update() {
         val name = nameEditText.text.toString()
         val notes = notesEditText.text.toString()
         val rarity = rarityTypes[raritySpinner.selectedItem]
@@ -208,7 +208,7 @@ class BirdDetailsActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun delete(view: View) {
+    fun delete() {
         dbHandler.deleteRow(modifyId)
         Toast.makeText(this, "Data deleted", Toast.LENGTH_SHORT).show()
         finish()
