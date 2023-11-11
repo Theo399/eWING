@@ -260,7 +260,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
         val markerOptions = MarkerOptions()
         markerOptions.position(latLng)
         markerOptions.title("Current Location")
-        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
         mCurrentLocationMarker = mMap.addMarker(markerOptions)
 
         // Move map camera
@@ -384,11 +384,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
                     origin = MarkerOptions().position(currentLocation)
                         .title("HSR Layout")
                         .snippet("origin")
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
                     destination = MarkerOptions().position(LatLng(endLatitude, endlongitude))
                         .title(locationSearch.text.toString())
                         .snippet("Distance = $s KM")
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
                     mMap.addMarker(destination!!)
                     mMap.addMarker(origin!!)
 
