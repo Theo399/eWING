@@ -18,6 +18,9 @@
         android:theme="@style/Theme.EWING20"
         tools:targetApi="31">
         <activity
+            android:name=".map.hotspot.HotspotActivity"
+            android:exported="false" />
+        <activity
             android:name=".map.bird.BirdDetailsActivity"
             android:exported="false" />
         <activity

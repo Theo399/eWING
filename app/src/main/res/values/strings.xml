@@ -59,4 +59,5 @@
     <string name="passwordHeading">Password</string>
     <string name="usernameHeading">Username</string>
     <string name="profileUsername">e.g. Theodore</string>
+    <string name="Hotspot_title">Birds\' Hotspots</string>
 </resources>
