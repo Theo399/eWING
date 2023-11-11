@@ -25,7 +25,6 @@ import androidx.core.content.ContextCompat
 import com.example.ewing20.R
 import com.example.ewing20.databinding.ActivityMapsBinding
 import com.example.ewing20.map.bird.BirdActivity
-import com.example.ewing20.map.hotspot.HotspotActivity
 import com.example.ewing20.map.profile.ProfileActivity
 import com.example.ewing20.map.setting.SettingActivity
 import com.google.android.gms.common.ConnectionResult
