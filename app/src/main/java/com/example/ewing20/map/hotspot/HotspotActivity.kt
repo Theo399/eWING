@@ -1,9 +1,8 @@
 package com.example.ewing20.map.hotspot
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.ewing20.R
 import com.example.ewing20.databinding.ActivityHotspotBinding
 import com.example.ewing20.map.hotspot.hotspotAdapter.HotspotAdapter
 import com.example.ewing20.map.hotspot.hotspotModel.HotspotModel
@@ -40,23 +39,18 @@ class HotspotActivity : AppCompatActivity() {
                 val hotspots = hotspotArray.getJSONObject(i)
 
                 // Fetch date store it in variable
-                val hId = hotspots.getString("id")
-                val hCountry = hotspots.getString("country")
-                val hCountryCode = hotspots.getString("countryCode")
-                val hLatitude = hotspots.getString("latitude")
-                val hLongitude = hotspots.getString("longitude")
-                val hLocation = hotspots.getString("location")
-                val hCount = hotspots.getString("count")
+                //val hId = hotspots.getString("id")
+                //val hCountry = hotspots.getString("country")
+                //val hCountryCode = hotspots.getString("countryCode")
+                val hLatitude = hotspots.getDouble("latitude")
+                val hLongitude = hotspots.getDouble("longitude")
+                //val hLocation = hotspots.getString("location")
+                //val hCount = hotspots.getString("count")
 
                 // Now add all the variables to the data model class and the data model class to the array list.
                 val hotspotDetails = HotspotModel(
-                    hId,
-                    hCountry,
-                    hCountryCode,
                     hLatitude,
-                    hLongitude,
-                    hLocation,
-                    hCount)
+                    hLongitude)
 
                 // Add the details in the list
                 hotspotList.add(hotspotDetails)

@@ -40,13 +40,13 @@ class HotspotAdapter (private val dataSets: ArrayList<HotspotModel>):
 
         val dataSet = dataSets[position]
 
-        viewholder.id.text = dataSet.id
-        viewholder.country.text = dataSet.country
-        viewholder.countryCode.text = dataSet.countryCode
-        viewholder.latitude.text = dataSet.latitude
-        viewholder.longitude.text = dataSet.longitude
-        viewholder.location.text = dataSet.location
-        viewholder.count.text = dataSet.count
+        //viewholder.id.text = dataSet.id
+        //viewholder.country.text = dataSet.country
+        //viewholder.countryCode.text = dataSet.countryCode
+        viewholder.latitude.text = dataSet.latitude.toString()
+        viewholder.longitude.text = dataSet.longitude.toString()
+        //viewholder.location.text = dataSet.location
+        //viewholder.count.text = dataSet.count
     }
 
     /**
@@ -61,23 +61,23 @@ class HotspotAdapter (private val dataSets: ArrayList<HotspotModel>):
 
     class ViewHolder(view: ItemHotspotLayoutBinding) : RecyclerView.ViewHolder(view.root) {
 
-        val id: TextView
-        val country: TextView
-        val countryCode: TextView
+        //val id: TextView
+        //val country: TextView
+        //val countryCode: TextView
         val latitude: TextView
         val longitude: TextView
-        val location: TextView
-        val count: TextView
+        //val location: TextView
+        //val count: TextView
 
         // Holds the TextView that will add each item to
         init {
-            id = view.id
-            country = view.country
-            countryCode = view.countryCode
+            //id = view.id
+            //country = view.country
+            //countryCode = view.countryCode
             latitude = view.latitude
             longitude = view.longitude
-            location = view.location
-            count = view.count
+            //location = view.location
+            //count = view.count
         }
     }
 }

@@ -11,6 +11,8 @@
     <string name="google_map_api_key" tools:ignore="Typos">AIzaSyBvMOr4ftJjlnIG4Kx_D6XPcx67o4Mu1G0</string>
     <string name="title_activity_maps">MapsActivity</string>
 
+    <string name="server_key" tools:ignore="Typos">AIzaSyAP5FRqOX5GLIAzzr3IY8SjcWJT6-fLbMU</string>
+
     <string name="eBird_api_key" tools:ignore="Typos">lm7if8fvtvip</string>
 
     <string name="normal_map">Normal Map</string>

@@ -58,4 +58,7 @@ dependencies {
     implementation("com.android.car.ui:car-ui-lib:2.5.1")
 
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
+
+    implementation("com.squareup.okhttp3:okhttp:3.14.9")
+    implementation("com.google.code.gson:gson:2.10.1")
 }
