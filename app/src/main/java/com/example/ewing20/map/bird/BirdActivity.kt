@@ -18,6 +18,11 @@ import com.example.ewing20.map.bird.birdAdapter.BirdAdapter
 import com.example.ewing20.map.bird.birdDBHelper.DBHelper
 import com.example.ewing20.map.bird.birdVariables.Bird
 import com.example.ewing20.utils.Utils
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
+import android.os.Build
+import androidx.core.app.NotificationCompat
 
 class BirdActivity : AppCompatActivity() {
 
@@ -42,6 +47,10 @@ class BirdActivity : AppCompatActivity() {
 
         binding.detailsBtn.setOnClickListener {
             startActivity(Intent(this, BirdDetailsActivity::class.java))
+
+          //Add button to trigger notification
+            /*binding.sendNotificationBtn.setOnClickListener {
+            sendBirdObservationNotification()*/
         }
 
         mTextView = findViewById(R.id.textView)
@@ -144,4 +153,31 @@ class BirdActivity : AppCompatActivity() {
     public override fun onResume() {
         super.onResume()
     }
+    
 }
+/* private fun sendBirdObservationNotification() {
+                // Create a notification channel 
+                val channelId = "bird_observation_channel"
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    val channel = NotificationChannel(
+                        channelId,
+                        "Bird Observation Channel",
+                        NotificationManager.IMPORTANCE_DEFAULT
+                    )
+                    val notificationManager =
+                        getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                    notificationManager.createNotificationChannel(channel)
+                }
+
+                // Build the notification
+                val notification = NotificationCompat.Builder(this, channelId)
+                    .setContentTitle("New Bird Observation")
+                    .setContentText("A new bird has been observed!")
+                    .setSmallIcon(R.drawable.ic_notification)
+                    .build()
+
+                // Display the notification
+                val notificationManager =
+                    getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                notificationManager.notify(1, notification)
+            }*/ 

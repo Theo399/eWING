@@ -71,7 +71,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toTopOf="@+id/login_password"
                 android:autofillHints=""
-                tools:ignore="TextFields,VisualLintTextFieldSize" />
+                tools:ignore="TextFields,VisualLintTextFieldSize"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                />
 
             <TextView
                 android:id="@+id/login_password"
@@ -100,7 +103,9 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toTopOf="@+id/login_button"
                 android:autofillHints=""
-                tools:ignore="TextFields,VisualLintTextFieldSize" />
+                tools:ignore="TextFields,VisualLintTextFieldSize"
+                android:focusable="true"
+                android:focusableInTouchMode="true"/>
 
             <Button
                 android:id="@+id/login_button"
