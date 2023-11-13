@@ -24,9 +24,12 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.ewing20.R
 import com.example.ewing20.databinding.ActivityMapsBinding
+import com.example.ewing20.map.about.AboutActivity
 import com.example.ewing20.map.bird.BirdActivity
 import com.example.ewing20.map.profile.ProfileActivity
 import com.example.ewing20.map.setting.SettingActivity
+import com.example.ewing20.map.video.VideoActivity
+import com.example.ewing20.map.web.WebActivity
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.LocationRequest
@@ -45,6 +48,8 @@ import com.google.gson.Gson
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import java.io.IOException
+import java.math.BigDecimal
+import java.math.RoundingMode
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
     GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
@@ -84,6 +89,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
     private val TAG = MapsActivity::class.java.simpleName
 
     private lateinit var mDistanceView: TextView
+    private lateinit var mTimeView: TextView
 
     private var endLatitude = 0.0
     private var endlongitude = 0.0
@@ -125,6 +131,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
         locationArrayList!!.add(AlexanderBay)
 
         mDistanceView = findViewById(R.id.distanceView)
+        mTimeView = findViewById(R.id.timeView)
 
         binding.searchBtn.setOnClickListener {
             searchLocation()
@@ -156,6 +163,18 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
 
         binding.locationBtn.setOnClickListener {
             onLocationChanged()
+        }
+
+        binding.videoBtn.setOnClickListener {
+            startActivity(Intent(this, VideoActivity::class.java))
+        }
+
+        binding.webBtn.setOnClickListener {
+            startActivity(Intent(this, WebActivity::class.java))
+        }
+
+        binding.aboutBtn.setOnClickListener {
+            startActivity(Intent(this, AboutActivity::class.java))
         }
     }
 
@@ -270,6 +289,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
         if (mGoogleApiClient != null) {
             LocationServices.getFusedLocationProviderClient(this)
         }
+
+        mDistanceView.text = ""
+        mTimeView.text = ""
     }
 
     override fun onConnectionFailed(connectionResult: ConnectionResult) {
@@ -377,7 +399,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
                         results
                     )
 
-                    val s = String.format("%1f", results[0] / 1000)
+                    val s = ((results[0] / 1000) + 12).toInt()
+                    val time = ((results[0] / 1000) / 60).toDouble()
+                    val decimal = BigDecimal(time).setScale(2, RoundingMode.HALF_EVEN)
 
                     // Setting marker to draw route between these two points
                     origin = MarkerOptions().position(currentLocation)
@@ -391,20 +415,35 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
                     mMap.addMarker(destination!!)
                     mMap.addMarker(origin!!)
 
-                    Toast.makeText(applicationContext,  "Distance = $s KM", Toast.LENGTH_SHORT)
+                    Toast.makeText(applicationContext,  "Distance = $s km, Time = $decimal", Toast.LENGTH_SHORT)
                         .show()
 
-                    mDistanceView.text = "$s Km"
+                    mDistanceView.text = "$s"
+                    mTimeView.text = "$decimal"
+
+                    /*
+                    val polyLine = mMap.addPolyline(PolylineOptions().apply {
+                        add(currentLocation, latLng)
+                        width(10f)
+                        color(Color.GREEN)
+                        geodesic(true)
+                    })
+
+                    val newList = listOf(currentLocation, latLng)
+                    polyLine.points  = newList
+                     */
 
                     // Getting URL to the Google Directions API
-                    val mURL = getDirectionUrl(currentLocation, latLng)
-                    GetDirection(mURL).execute()
+                    val url = "https://maps.googleapis.com/maps/api/directions/json?origin=-26.0935824633,28.0477972026&destination=${myAddress.latitude},${myAddress.longitude}&mode=driving&key=AIzaSyAP5FRqOX5GLIAzzr3IY8SjcWJT6-fLbMU"
+                        //getDirectionUrl(latLng)
+                    GetDirection(url).execute()
                 }
             }
         }
     }
-
-    private fun getDirectionUrl(origin: LatLng, dest: LatLng): String {
+    // origin: LatLng,
+    /*
+    private fun getDirectionUrl(dest: LatLng): String {
 
         // Origin of route
         //val strOrigin = "origin=${origin.latitude},${origin.longitude}"
@@ -422,8 +461,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
         //val output = "json"
 
         // Building the url to the web service
-        return "https://maps.googleapis.com/maps/api/directions/json?origin=${origin.latitude},${origin.longitude}&destination=${dest.latitude},${dest.longitude}&mode=driving&key=AIzaSyAP5FRqOX5GLIAzzr3IY8SjcWJT6-fLbMU"
-    }
+        return "https://maps.googleapis.com/maps/api/directions/json?origin=-26.0935824633,28.0477972026&destination=${dest.latitude},${dest.longitude}&mode=driving&key=AIzaSyAP5FRqOX5GLIAzzr3IY8SjcWJT6-fLbMU"
+    }*/
 
     @SuppressLint("StaticFieldLeak")
     inner class GetDirection(private val url: String) : AsyncTask<Void, Void, List<List<LatLng>>>(){
@@ -438,7 +477,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback,
             try {
                 val respObj = Gson().fromJson(data, GoogleMapDTO::class.java)
                 val path = ArrayList<LatLng>()
-                for (i in 0..<respObj.routes[0].legs[0].steps.size-1) {
+                for (i in 0 until (respObj.routes[0].legs[0].steps.size-1)) {
                     /*val startLatLng = LatLng(respObj.routes[0].legs[0].steps[i].start_location.lat.toDouble(),
                         respObj.routes[0].legs[0].steps[i].start_location.lng.toDouble())
                     path.add(startLatLng)

@@ -48,9 +48,7 @@ class HotspotActivity : AppCompatActivity() {
                 //val hCount = hotspots.getString("count")
 
                 // Now add all the variables to the data model class and the data model class to the array list.
-                val hotspotDetails = HotspotModel(
-                    hLatitude,
-                    hLongitude)
+                val hotspotDetails = HotspotModel(hLatitude, hLongitude)
 
                 // Add the details in the list
                 hotspotList.add(hotspotDetails)

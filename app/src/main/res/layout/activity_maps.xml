@@ -21,6 +21,7 @@
         android:id="@+id/linearlayout"
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:orientation="horizontal"
         android:background="@android:color/transparent"
         app:layout_constraintTop_toBottomOf="@+id/map"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,16 +31,45 @@
 
         <TextView
             android:id="@+id/distanceView"
-            android:layout_width="match_parent"
+            android:layout_width="150dp"
             android:layout_height="40dp"
             android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
             android:background="@drawable/bg_search_view"
-            android:hint="@string/distance"
             android:textColor="@color/black"
             android:textSize="25sp"
             android:textAlignment="center"
             />
+
+        <TextView
+            android:layout_width="42dp"
+            android:layout_height="40dp"
+            android:text="km"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            tools:ignore="HardcodedText,TextSizeCheck" />
+
+        <TextView
+            android:id="@+id/timeView"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/bg_search_view"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:textAlignment="center"
+            />
+
+        <TextView
+            android:layout_width="45dp"
+            android:layout_height="40dp"
+            android:text="hrs"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            tools:ignore="HardcodedText,TextSizeCheck" />
 
     </LinearLayout>
 
@@ -155,17 +185,66 @@
         tools:ignore="ImageContrastCheck" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/zoomInBtn"
+        android:id="@+id/videoBtn"
         style="@style/Widget.MaterialComponents.FloatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
+        android:layout_marginTop="30dp"
+        android:contentDescription="@string/todo"
+        android:tint="@android:color/black"
+        app:backgroundTint="@color/white"
+        app:srcCompat="@drawable/ic_video"
+        app:tint="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/settingBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="ImageContrastCheck" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/webBtn"
+        style="@style/Widget.MaterialComponents.FloatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:contentDescription="@string/todo"
+        android:tint="@android:color/black"
+        app:backgroundTint="@color/white"
+        app:srcCompat="@drawable/ic_web"
+        app:tint="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/videoBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="ImageContrastCheck" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/aboutBtn"
+        style="@style/Widget.MaterialComponents.FloatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:contentDescription="@string/todo"
+        android:tint="@android:color/black"
+        app:backgroundTint="@color/white"
+        app:srcCompat="@drawable/ic_about"
+        app:tint="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/webBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="ImageContrastCheck" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/zoomInBtn"
+        style="@style/Widget.MaterialComponents.FloatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:layout_marginTop="40dp"
         android:layout_marginBottom="5dp"
         android:contentDescription="@string/todo"
         android:tint="@android:color/black"
         app:backgroundTint="@color/grey"
-        app:layout_constraintBottom_toTopOf="@+id/zoomOutBtn"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/locationBtn"
+        app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_zoom_in"
         app:tint="@color/black"
         tools:ignore="ImageContrastCheck,DuplicateSpeakableTextCheck" />
@@ -175,13 +254,13 @@
         style="@style/Widget.MaterialComponents.FloatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginBottom="70dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginTop="5dp"
         android:contentDescription="@string/todo"
         android:tint="@android:color/black"
         app:backgroundTint="@color/grey"
-        app:layout_constraintBottom_toTopOf="@+id/linearlayout"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/zoomInBtn"
+        app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_zoom_out"
         app:tint="@color/black"
         tools:ignore="ImageContrastCheck,DuplicateSpeakableTextCheck" />

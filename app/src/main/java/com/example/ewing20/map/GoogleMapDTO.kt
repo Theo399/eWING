@@ -1,7 +1,5 @@
 package com.example.ewing20.map
 
-import com.google.android.gms.maps.model.Polyline
-
 class GoogleMapDTO {
     var routes = ArrayList<Routes>()
 }
@@ -14,8 +12,8 @@ class Legs {
     var distance = Distance()
     var duration = Duration()
     var end_address = ""
-    var start_address = ""
     var end_location = Location()
+    var start_address = ""
     var start_location = Location()
     var steps = ArrayList<Steps>()
 }
@@ -23,13 +21,11 @@ class Legs {
 class Steps {
     var distance = Distance()
     var duration = Duration()
-    var end_address = ""
-    var start_address = ""
     var end_location = Location()
-    var start_location = Location()
-    var polyline = PolyLine()
-    var travel_mode = ""
     var maneuver = ""
+    var polyline = PolyLine()
+    var start_location = Location()
+    var travel_mode = ""
 }
 
 class Duration {
