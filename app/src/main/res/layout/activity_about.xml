@@ -23,13 +23,19 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
         android:layout_marginTop="16dp"
         android:text="About eWing"
         android:textSize="24sp"
+=======
+        android:layout_marginTop="100dp"
+        android:text="About Activity"
+>>>>>>> fd93b9e4d00e83e419284cf2e8d09eb02b516c55
         app:layout_constraintTop_toBottomOf="@id/toolBar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
+<<<<<<< HEAD
     <TextView
         android:id="@+id/aboutText"
         android:layout_width="wrap_content"
@@ -48,3 +54,6 @@
         app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+=======
+</androidx.constraintlayout.widget.ConstraintLayout>
+>>>>>>> fd93b9e4d00e83e419284cf2e8d09eb02b516c55
